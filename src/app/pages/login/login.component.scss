@@ -1,0 +1,27 @@
+@import "styles";
+
+.title {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+label {
+  font-weight: 700;
+}
+
+input:hover {
+  transition-duration: 0.3s;
+  transition-property: background-color, box-shadow;
+  transition-timing-function: ease-in;
+  background-color: lightgray;
+  border-color: #e4e9f2;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.btn.btn-primary[disabled] {
+  background-color: rgba(143, 155, 179, 0.24);
+}

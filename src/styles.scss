@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/grid";
+
+h1 {
+  font-size: 2.25rem;
+  font-family: Open Sans, sans-serif;
+  font-weight: 700;
+  line-height: 3rem;
+}
+
+.label {
+  font-family: Open Sans, sans-serif;
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+input[type="text"] {
+  border-style: solid;
+  border-width: 1px;
+  font-family: Open Sans, sans-serif;
+}
