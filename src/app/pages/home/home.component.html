@@ -1,0 +1,37 @@
+<app-header></app-header>
+<div class="row">
+  <!--Left Grid Columne 33%-->
+  <div class="col-md-3 col-sm-1 col-xs-1"></div>
+  <!--Middle Grid Columne 33%-->
+  <div class="col-md-6 col-sm-6 col-xs-6">
+    <nb-card>
+      <nb-card-header class="text-center">Our Latest Posts</nb-card-header>
+      <nb-card-body>
+        <ul *ngIf="landmarks">
+          <li *ngFor="let landmark of sortBy('order')">
+            <div class="row marginal">
+              <div
+                [ngClass]="{
+                  'col-md-2': landmark.photo_thumb,
+                  'col-md-4': !landmark.photo_thumb
+                }"
+              ></div>
+
+              <div *ngIf="landmark.photo_thumb" class="col-md-4 centralize">
+                <img src="assets/images/dubai_downtown.jpg" alt="" />
+              </div>
+              <div class="col-md-4">
+                <h3 class="centralize">{{ landmark.title }}</h3>
+                <p class="text-align">
+                  {{ landmark.short_info }}
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <!--Right Grid Columne 33%-->
+  <div class="col-md-3 col-sm-1 col-xs-1"></div>
+</div>

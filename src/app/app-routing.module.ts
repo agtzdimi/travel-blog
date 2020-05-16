@@ -1,6 +1,7 @@
 import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { NgModule } from '@angular/core';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
@@ -9,24 +10,29 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: LoginComponent
+        component: LoginComponent,
       },
       {
         path: 'login',
-        component: LoginComponent
-      }
-    ]
+        component: LoginComponent,
+      },
+    ],
   },
-  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'auth/login' }
+  {
+    path: 'home',
+    component: HomeComponent,
+    pathMatch: 'full',
+  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home' },
 ];
 
 const config: ExtraOptions = {
-  useHash: true
+  useHash: true,
 };
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, config)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

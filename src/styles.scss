@@ -1,3 +1,10 @@
+@import "themes";
+
+@import "~@nebular/theme/styles/globals";
+
+@include nb-install() {
+  @include nb-theme-global();
+}
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
@@ -6,13 +13,15 @@
 
 h1 {
   font-size: 2.25rem;
-  font-family: Open Sans, sans-serif;
   font-weight: 700;
   line-height: 3rem;
 }
 
-.label {
+* {
   font-family: Open Sans, sans-serif;
+}
+
+.label {
   font-size: 1rem;
   line-height: 1rem;
 }
@@ -20,5 +29,27 @@ h1 {
 input[type="text"] {
   border-style: solid;
   border-width: 1px;
-  font-family: Open Sans, sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.centralize {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+nb-card-header {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+nb-card {
+  background-color: #edf1f7;
 }
