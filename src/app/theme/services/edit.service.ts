@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 export class EditService {
   public editLandmarkTitle = '';
   public editLandmarkShortInfo = '';
+  public editDescription = '';
+  public editURL = '';
   public editTitleFlag = false;
   public editShortInfoFlag = false;
   public editDescriptionFlag = false;

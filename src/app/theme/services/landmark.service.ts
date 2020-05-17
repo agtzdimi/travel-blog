@@ -6,16 +6,37 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class LandmarkService {
+  headers = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Parse-Application-Id': 'NqqPKd9Mzzdk0Es6P7NdzXOXNb4tsqdq6Q8p0cZi',
+    }),
+  };
+
   constructor(private httpClient: HttpClient, protected router: Router) {}
 
   public getLandmarks(): Observable<LandmarkModel[]> {
-    const uri = 'http://localhost:5000/parse/classes/Landmarks';
+    const uri = 'http://localhost:5000/parse/landmarks';
 
-    return this.httpClient.get<LandmarkModel[]>(uri, {
+    return this.httpClient.get<LandmarkModel[]>(uri, this.headers);
+  }
+
+  public updateLandmark(landmark: LandmarkModel): Observable<Object> {
+    console.log(landmark);
+    const landmarkParam = {
+      title: landmark.title,
+      description: landmark.description,
+      url: landmark.url,
+      short_info: landmark.short_info,
+    };
+    const uri = `http://localhost:5000/parse/landmarks/${landmark.objectId}`;
+
+    return this.httpClient.put<LandmarkModel[]>(uri, landmarkParam, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'X-Parse-Application-Id': 'NqqPKd9Mzzdk0Es6P7NdzXOXNb4tsqdq6Q8p0cZi',
       }),
+      params: landmarkParam,
     });
   }
 }

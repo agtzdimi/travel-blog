@@ -6,7 +6,7 @@ export class LandmarkModel {
   url: string;
   photo: string;
   photo_thumb: string;
-  gisLocation: {
+  location: {
     lat: number;
     long: number;
   };

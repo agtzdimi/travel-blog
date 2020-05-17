@@ -24,6 +24,8 @@ import { LandmarkDetailsComponent } from './pages/landmark-details/landmark-deta
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './theme/guards/auth-guard.service';
 import { DialogImageFullComponent } from './theme/components/dialog-image-full/dialog-image-full.component';
+import { MapComponent } from './theme/components/map/map.component';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { DialogImageFullComponent } from './theme/components/dialog-image-full/d
     ViewModeComponent,
     LandmarkDetailsComponent,
     DialogImageFullComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,12 @@ import { DialogImageFullComponent } from './theme/components/dialog-image-full/d
     FormsModule,
     RouterModule,
     NbDialogModule.forRoot(),
+    NgxMapboxGLModule.withConfig({
+      accessToken:
+        'pk.eyJ1IjoiYWd0emRpbWkiLCJhIjoiY2pyaXc2OWN6MDV0cTQ0cXd1NHA0cHI1OSJ9.NQIQGDjleOWNi7bpSu_AGw',
+      geocoderAccessToken:
+        'pk.eyJ1IjoiYWd0emRpbWkiLCJhIjoiY2pyaXc2OWN6MDV0cTQ0cXd1NHA0cHI1OSJ9.NQIQGDjleOWNi7bpSu_AGw',
+    }),
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

@@ -29,3 +29,18 @@
   type="text"
   [(ngModel)]="tempURL"
 />
+<!-- Submit button to update the information to the server/database -->
+<div *ngIf="changesOccur(currentLandmark)" class="row centralize">
+  <button
+    class="btn btn-success btn-lg full-width m-2"
+    (click)="updateInfo(currentLandmark)"
+  >
+    Submit
+  </button>
+  <button
+    class="btn btn-danger btn-lg full-width m-2"
+    (click)="resetToViewMode()"
+  >
+    Cancel
+  </button>
+</div>

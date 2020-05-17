@@ -53,37 +53,17 @@ export class LandmarkDetailsComponent implements OnInit {
     this.editService.editDescriptionFlag = false;
   }
 
-  public editTitle(): void {
+  public toggleInfoTitle(): void {
     this.editService.editTitleFlag = true;
-  }
-
-  public editShortInfo(): void {
     this.editService.editShortInfoFlag = true;
   }
 
-  public editDescription(): void {
+  public toggleDescrURL(): void {
     this.editService.editDescriptionFlag = true;
-  }
-
-  public editURL(): void {
     this.editService.editURLFlag = true;
   }
 
   public getEditServiceInfo(attribute: string): any {
     return this.editService.getAttribute(attribute);
-  }
-
-  public resetToViewMode(): void {
-    this.editService.editShortInfoFlag = false;
-    this.editService.editTitleFlag = false;
-  }
-
-  public changesOccur(): boolean {
-    return (
-      this.getEditServiceInfo('shortInfoFlag') ||
-      this.getEditServiceInfo('titleFlag') ||
-      this.getEditServiceInfo('DescriptionFlag') ||
-      this.getEditServiceInfo('URLFlag')
-    );
   }
 }

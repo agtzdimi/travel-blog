@@ -71,19 +71,6 @@
                   [currentLandmark]="showingLandmark"
                   [mode]="'description'"
                 ></app-view-mode>
-
-                <!-- Submit button to update the information to the server/database -->
-                <div *ngIf="changesOccur()" class="row centralize">
-                  <button class="btn btn-success btn-lg full-width m-2">
-                    Submit
-                  </button>
-                  <button
-                    class="btn btn-danger btn-lg full-width m-2"
-                    (click)="resetToViewMode()"
-                  >
-                    Cancel
-                  </button>
-                </div>
               </div>
 
               <!-- PopOver for editing Description/URL-->
@@ -103,6 +90,16 @@
             </div>
           </li>
         </ul>
+
+        <div class="row">
+          <div class="col-md-12">
+            <app-map
+              *ngIf="showingLandmark"
+              [(coordinates)]="showingLandmark.location"
+            >
+            </app-map>
+          </div>
+        </div>
       </nb-card-body>
     </nb-card>
   </div>
@@ -114,37 +111,27 @@
 <!--PopOver Template for editing a Title & short_info-->
 <ng-template #editTitleShortInfo>
   <p class="text-center p-2">Editing {{ showingLandmark["title"] }}</p>
-  <button
-    class="btn btn-primary btn-lg full-width m-2"
-    status="primary"
-    (click)="editTitle()"
-  >
-    Title
-  </button>
-  <button
-    class="btn btn-primary btn-lg full-width m-2"
-    status="primary"
-    (click)="editShortInfo()"
-  >
-    Short info
-  </button>
+  <div class="centralize p-2">
+    <button
+      class="btn btn-primary btn-lg"
+      status="primary"
+      (click)="toggleInfoTitle()"
+    >
+      Toggle Edit
+    </button>
+  </div>
 </ng-template>
 
 <!--PopOver Template for editing a Description & URL-->
 <ng-template #editDescriptionURL>
   <p class="text-center p-2">Editing {{ showingLandmark["title"] }}</p>
-  <button
-    class="btn btn-primary btn-lg full-width m-2"
-    status="primary"
-    (click)="editDescription()"
-  >
-    Description
-  </button>
-  <button
-    class="btn btn-primary btn-lg full-width m-2"
-    status="primary"
-    (click)="editURL()"
-  >
-    URL
-  </button>
+  <div class="centralize p-2">
+    <button
+      class="btn btn-primary btn-lg"
+      status="primary"
+      (click)="toggleDescrURL()"
+    >
+      Toggle Edit
+    </button>
+  </div>
 </ng-template>

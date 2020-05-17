@@ -62,4 +62,55 @@ export class EditModeComponent implements OnInit {
   public showURL(): boolean {
     return this.getEditServiceInfo('URLFlag') && this.mode === 'description';
   }
+
+  public resetToViewMode(): void {
+    this.editService.editShortInfoFlag = false;
+    this.editService.editTitleFlag = false;
+    this.editService.editDescriptionFlag = false;
+    this.editService.editURLFlag = false;
+  }
+
+  public changesOccur(landmark: LandmarkModel): boolean {
+    if (
+      landmark.title === this.getEditServiceInfo('landmarkTitle') &&
+      this.mode === 'title'
+    ) {
+      if (
+        this.getEditServiceInfo('shortInfoFlag') ||
+        this.getEditServiceInfo('titleFlag')
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (
+      landmark.title === this.getEditServiceInfo('landmarkTitle') &&
+      this.mode === 'description'
+    ) {
+      if (
+        this.getEditServiceInfo('DescriptionFlag') ||
+        this.getEditServiceInfo('URLFlag')
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  public updateInfo(landmark: LandmarkModel): void {
+    landmark.description = this.tempDescription;
+    landmark.short_info = this.tempShortInfo;
+    landmark.url = this.tempURL;
+    landmark.title = this.tempTitle;
+    this.resetToViewMode();
+    this.landmarkService.updateLandmark(landmark).subscribe(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

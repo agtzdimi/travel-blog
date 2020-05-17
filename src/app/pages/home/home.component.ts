@@ -33,21 +33,23 @@ export class HomeComponent implements OnInit {
       (landmarks) => {
         this.landmarks = landmarks[landResAttrib];
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
 
   public selectOption(landmark: LandmarkModel): void {
-    this.editService.editLandmarkTitle = landmark['title'];
+    this.editService.editLandmarkTitle = landmark.title;
+    this.editService.editDescription = landmark.description;
+    this.editService.editURL = landmark.url;
+    this.editService.editLandmarkShortInfo = landmark.short_info;
     this.editService.editTitleFlag = false;
     this.editService.editShortInfoFlag = false;
   }
 
-  public editTitle(): void {
+  public toggleInfoTitle(): void {
     this.editService.editTitleFlag = true;
-  }
-
-  public editShortInfo(): void {
     this.editService.editShortInfoFlag = true;
   }
 
@@ -59,18 +61,5 @@ export class HomeComponent implements OnInit {
 
   public getEditServiceInfo(attribute: string): any {
     return this.editService.getAttribute(attribute);
-  }
-
-  public resetToViewMode(): void {
-    this.editService.editShortInfoFlag = false;
-    this.editService.editTitleFlag = false;
-  }
-
-  public changesOccur(landmark: LandmarkModel): boolean {
-    return (
-      (this.getEditServiceInfo('shortInfoFlag') ||
-        this.getEditServiceInfo('titleFlag')) &&
-      landmark.title === this.getEditServiceInfo('landmarkTitle')
-    );
   }
 }
