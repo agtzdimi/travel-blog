@@ -3,35 +3,43 @@ import { LandmarkModel } from 'src/app/theme/models/Landmark.model';
 import { LandmarkService } from 'src/app/theme/services/landmark.service';
 import { LoginService } from 'src/app/theme/services/login.service';
 import { EditService } from 'src/app/theme/services/edit.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-landmark-details',
+  templateUrl: './landmark-details.component.html',
+  styleUrls: ['./landmark-details.component.scss'],
   providers: [LandmarkService],
 })
-export class HomeComponent implements OnInit {
+export class LandmarkDetailsComponent implements OnInit {
   public landmarks: LandmarkModel[];
   public writeAccess = false;
   public editLandmarkShortInfo: string;
   public popOverOptions = { animation: { type: 'zoom' } };
+  public showingLandmark: LandmarkModel;
 
   constructor(
     private landmarkService: LandmarkService,
     private loginService: LoginService,
-    private editService: EditService
+    private editService: EditService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.writeAccess = this.loginService.getUserWriteAccess();
-    this.getLandmarks();
+    this.getLandmark();
   }
 
-  public getLandmarks(): void {
+  public getLandmark(): void {
     const landResAttrib = 'results';
     this.landmarkService.getLandmarks().subscribe(
       (landmarks) => {
         this.landmarks = landmarks[landResAttrib];
+        this.showingLandmark = this.landmarks.filter((landmark) => {
+          return (
+            landmark['title'] === this.route.snapshot.queryParams['landmark']
+          );
+        })[0];
       },
       (error) => {}
     );
@@ -41,6 +49,8 @@ export class HomeComponent implements OnInit {
     this.editService.editLandmarkTitle = landmark['title'];
     this.editService.editTitleFlag = false;
     this.editService.editShortInfoFlag = false;
+    this.editService.editURLFlag = false;
+    this.editService.editDescriptionFlag = false;
   }
 
   public editTitle(): void {
@@ -51,10 +61,12 @@ export class HomeComponent implements OnInit {
     this.editService.editShortInfoFlag = true;
   }
 
-  public sortBy(field): LandmarkModel[] {
-    return this.landmarks.sort((a, b) =>
-      a[field] > b[field] ? 1 : a[field] === b[field] ? 0 : -1
-    );
+  public editDescription(): void {
+    this.editService.editDescriptionFlag = true;
+  }
+
+  public editURL(): void {
+    this.editService.editURLFlag = true;
   }
 
   public getEditServiceInfo(attribute: string): any {

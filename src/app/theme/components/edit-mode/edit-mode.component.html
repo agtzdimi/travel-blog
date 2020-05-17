@@ -1,21 +1,31 @@
 <input
-  *ngIf="
-    getEditServiceInfo('titleFlag') &&
-    currentLandmark.title === getEditServiceInfo('landmarkTitle')
-  "
+  *ngIf="showTitle()"
   class="centralize form-control m-2"
   fullWidth
   type="text"
   [(ngModel)]="tempTitle"
 />
 <textarea
-  *ngIf="
-    getEditServiceInfo('shortInfoFlag') &&
-    currentLandmark.title === getEditServiceInfo('landmarkTitle')
-  "
+  *ngIf="showShortInfo()"
   class="m-2 centralize form-control"
   fullWidth
   (change)="tempShortInfo = $event['target']['value']"
   rows="20"
   >{{ tempShortInfo }}</textarea
 >
+
+<textarea
+  *ngIf="showDescription()"
+  class="m-2 centralize form-control"
+  fullWidth
+  (change)="tempDescription = $event['target']['value']"
+  rows="20"
+  >{{ tempDescription }}</textarea
+>
+<input
+  *ngIf="showURL()"
+  class="centralize form-control m-2"
+  fullWidth
+  type="text"
+  [(ngModel)]="tempURL"
+/>

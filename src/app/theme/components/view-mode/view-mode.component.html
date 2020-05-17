@@ -1,23 +1,19 @@
-<h3
-  *ngIf="
-    !(
-      getEditServiceInfo('titleFlag') &&
-      currentLandmark.title === getEditServiceInfo('landmarkTitle')
-    )
-  "
-  class="centralize"
+<a
+  *ngIf="showTitle()"
+  class="centralize p-4 title"
+  [routerLink]="['/landmark-details']"
+  [queryParams]="{ landmark: currentLandmark.title }"
 >
   {{ currentLandmark.title }}
-</h3>
+</a>
 
-<p
-  class="text-align"
-  *ngIf="
-    !(
-      getEditServiceInfo('shortInfoFlag') &&
-      currentLandmark.title === getEditServiceInfo('landmarkTitle')
-    )
-  "
->
+<p class="text-align" *ngIf="showShortInfo()">
   {{ currentLandmark.short_info }}
 </p>
+
+<p class="text-align" *ngIf="showDescription()">
+  {{ currentLandmark.description }}
+</p>
+<a [href]="currentLandmark['url']" target="_blank" *ngIf="showURL()"
+  >Official URL</a
+>

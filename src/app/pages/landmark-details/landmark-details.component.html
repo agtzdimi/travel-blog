@@ -9,40 +9,43 @@
     <!-- Main Card Content -->
     <nb-card>
       <nb-card-body>
-        <!-- When Landmarks retrieved from the Database We visualize them in Sorted Order-->
-        <ul *ngIf="landmarks">
-          <li *ngFor="let landmark of sortBy('order')">
-            <!-- Basic html for each landmark -->
+        <!-- When we retrive the queryParam show the body of the card-->
+        <ul *ngIf="showingLandmark">
+          <li>
+            <!-- Basic html for the selected landmark -->
             <div class="row margin-bot">
               <!-- If we have a user without write access we center our content -->
               <div *ngIf="!writeAccess" class="col-md-4"></div>
 
               <!-- When an image is uploaded we refine the grid to be in the center -->
-              <div *ngIf="landmark.photo_thumb" class="col-md-1"></div>
+              <div *ngIf="showingLandmark.photo_thumb" class="col-md-1"></div>
 
               <div *ngIf="writeAccess" class="col-md-4 centralize">
                 <!-- Component to upload an image -->
                 <app-upload-image
-                  [currentLandmark]="landmark"
+                  [currentLandmark]="showingLandmark"
                 ></app-upload-image>
               </div>
 
               <div class="col-md-4">
                 <div class="row">
                   <div class="col-md-11">
-                    <!-- Component to show the editable components -->
+                    <!-- Component to show the non-editable components -->
                     <app-edit-mode
-                      [currentLandmark]="landmark"
+                      [currentLandmark]="showingLandmark"
                       [mode]="'title'"
                     ></app-edit-mode>
-                    <!-- Component to show the non-editable components -->
+                    <!-- Component to show the editable components -->
                     <app-view-mode
-                      [currentLandmark]="landmark"
+                      [currentLandmark]="showingLandmark"
                       [mode]="'title'"
                     ></app-view-mode>
 
                     <!-- Submit button to update the information to the server/database -->
-                    <div *ngIf="changesOccur(landmark)" class="row centralize">
+                    <div
+                      *ngIf="changesOccur(showingLandmark)"
+                      class="row centralize"
+                    >
                       <button class="btn btn-success btn-lg full-width m-2">
                         Submit
                       </button>
@@ -55,20 +58,49 @@
                     </div>
                   </div>
 
-                  <!-- PopOver for editing -->
+                  <!-- PopOver for editing Title/Short Info-->
                   <div class="col-md-1" *ngIf="writeAccess">
                     <div id="titleEdit" class="editTitleIcon">
                       <nb-icon
-                        [nbPopover]="edit"
+                        [nbPopover]="editTitleShortInfo"
                         nbPopoverPlacement="right"
                         nbPopoverTrigger="click"
                         icon="edit-2-outline"
                         status="primary"
-                        (click)="selectOption(landmark)"
+                        (click)="selectOption(showingLandmark)"
                         [options]="popOverOptions"
                       ></nb-icon>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row margin-bot">
+              <div class="col-md-11">
+                <h4>Description:</h4>
+                <app-edit-mode
+                  [currentLandmark]="showingLandmark"
+                  [mode]="'description'"
+                ></app-edit-mode>
+                <app-view-mode
+                  [currentLandmark]="showingLandmark"
+                  [mode]="'description'"
+                ></app-view-mode>
+              </div>
+
+              <!-- PopOver for editing Description/URL-->
+              <div class="col-md-1" *ngIf="writeAccess">
+                <div id="titleEdit" class="editTitleIcon">
+                  <nb-icon
+                    [nbPopover]="editDescriptionURL"
+                    nbPopoverPlacement="right"
+                    nbPopoverTrigger="click"
+                    icon="edit-2-outline"
+                    status="primary"
+                    (click)="selectOption(showingLandmark)"
+                    [options]="popOverOptions"
+                  ></nb-icon>
                 </div>
               </div>
             </div>
@@ -83,10 +115,8 @@
 </div>
 
 <!--PopOver Template for editing a Title & short_info-->
-<ng-template #edit>
-  <p class="text-center p-2">
-    Editing {{ getEditServiceInfo("landmarkTitle") }}
-  </p>
+<ng-template #editTitleShortInfo>
+  <p class="text-center p-2">Editing {{ showingLandmark["title"] }}</p>
   <button
     class="btn btn-primary btn-lg full-width m-2"
     status="primary"
@@ -100,5 +130,24 @@
     (click)="editShortInfo()"
   >
     Short info
+  </button>
+</ng-template>
+
+<!--PopOver Template for editing a Description & URL-->
+<ng-template #editDescriptionURL>
+  <p class="text-center p-2">Editing {{ showingLandmark["title"] }}</p>
+  <button
+    class="btn btn-primary btn-lg full-width m-2"
+    status="primary"
+    (click)="editDescription()"
+  >
+    Description
+  </button>
+  <button
+    class="btn btn-primary btn-lg full-width m-2"
+    status="primary"
+    (click)="editURL()"
+  >
+    URL
   </button>
 </ng-template>

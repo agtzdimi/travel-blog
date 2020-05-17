@@ -19,9 +19,21 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { UploadImageComponent } from './theme/components/upload-image/upload-image.component';
 import { EditModeComponent } from './theme/components/edit-mode/edit-mode.component';
 import { ViewModeComponent } from './theme/components/view-mode/view-mode.component';
+import { LandmarkDetailsComponent } from './pages/landmark-details/landmark-details.component';
+import { RouterModule } from '@angular/router';
+import { AuthGuard } from './theme/guards/auth-guard.service';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent, HeaderComponent, UploadImageComponent, EditModeComponent, ViewModeComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomeComponent,
+    HeaderComponent,
+    UploadImageComponent,
+    EditModeComponent,
+    ViewModeComponent,
+    LandmarkDetailsComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -35,8 +47,9 @@ import { ViewModeComponent } from './theme/components/view-mode/view-mode.compon
     NbIconModule,
     NbPopoverModule,
     FormsModule,
+    RouterModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

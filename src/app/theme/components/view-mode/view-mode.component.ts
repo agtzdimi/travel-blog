@@ -9,20 +9,41 @@ import { EditService } from '../../services/edit.service';
 })
 export class ViewModeComponent implements OnInit {
   @Input() currentLandmark: LandmarkModel;
+  @Input() mode: string;
 
   constructor(private editService: EditService) {}
 
   ngOnInit(): void {}
 
   public getEditServiceInfo(attribute: string): any {
-    switch (attribute) {
-      case 'titleFlag':
-        return this.editService.editTitleFlag;
-        break;
-      case 'shortInfoFlag':
-        return this.editService.editShortInfoFlag;
-      case 'landmarkTitle':
-        return this.editService.editLandmarkTitle;
-    }
+    return this.editService.getAttribute(attribute);
+  }
+
+  public showTitle(): boolean {
+    return (
+      !(
+        this.getEditServiceInfo('titleFlag') &&
+        this.currentLandmark.title === this.getEditServiceInfo('landmarkTitle')
+      ) && this.mode === 'title'
+    );
+  }
+
+  public showShortInfo(): boolean {
+    return (
+      !(
+        this.getEditServiceInfo('shortInfoFlag') &&
+        this.currentLandmark.title === this.getEditServiceInfo('landmarkTitle')
+      ) && this.mode === 'title'
+    );
+  }
+
+  public showDescription(): boolean {
+    return (
+      !this.getEditServiceInfo('DescriptionFlag') && this.mode === 'description'
+    );
+  }
+
+  public showURL(): boolean {
+    return !this.getEditServiceInfo('URLFlag') && this.mode === 'description';
   }
 }
