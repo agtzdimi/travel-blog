@@ -1,20 +1,7 @@
 @import "styles";
 
-img {
-  height: 250px;
-  width: 250px;
-}
-
-.text-align {
-  text-align: justify;
-}
-
-.marginal {
+.margin-bot {
   margin-bottom: 5rem;
-}
-
-p {
-  font-style: italic;
 }
 
 nb-card-header {
@@ -25,4 +12,8 @@ nb-card-header {
 
 ul {
   list-style-type: none;
+}
+
+.editTitleIcon {
+  padding-top: 1rem;
 }

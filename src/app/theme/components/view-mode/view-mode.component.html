@@ -1,0 +1,23 @@
+<h3
+  *ngIf="
+    !(
+      getEditServiceInfo('titleFlag') &&
+      currentLandmark.title === getEditServiceInfo('landmarkTitle')
+    )
+  "
+  class="centralize"
+>
+  {{ currentLandmark.title }}
+</h3>
+
+<p
+  class="text-align"
+  *ngIf="
+    !(
+      getEditServiceInfo('shortInfoFlag') &&
+      currentLandmark.title === getEditServiceInfo('landmarkTitle')
+    )
+  "
+>
+  {{ currentLandmark.short_info }}
+</p>

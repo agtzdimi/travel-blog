@@ -1,0 +1,39 @@
+<div *ngIf="currentLandmark && currentLandmark.photo_thumb" class="centralize">
+  <div class="row">
+    <div class="col-md-12">
+      <img [src]="currentLandmark.photo_thumb" alt="" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <ng-template [ngTemplateOutlet]="uploadText"></ng-template>
+    </div>
+  </div>
+</div>
+<div
+  *ngIf="!currentLandmark || !currentLandmark.photo_thumb"
+  class="centralize"
+>
+  <nb-card>
+    <nb-card-body>
+      <ng-template [ngTemplateOutlet]="uploadText"></ng-template>
+    </nb-card-body>
+  </nb-card>
+</div>
+
+<!-- Upload an Image Template -->
+<ng-template #uploadText>
+  <a class="ui image label">
+    <label class="upload-button">
+      <input
+        #imageInput
+        type="file"
+        accept="image/*"
+        (change)="processFile(imageInput)"
+        multiple
+        class="btn btn-primary d-none"
+      />
+      <span class="pointer">Upload an Image</span>
+    </label>
+  </a>
+</ng-template>

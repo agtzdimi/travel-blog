@@ -53,3 +53,11 @@ nb-card-header {
 nb-card {
   background-color: #edf1f7;
 }
+
+input:hover {
+  transition-duration: 0.3s;
+  transition-property: background-color, box-shadow;
+  transition-timing-function: ease-in;
+  background-color: lightgray;
+  border-color: #e4e9f2;
+}

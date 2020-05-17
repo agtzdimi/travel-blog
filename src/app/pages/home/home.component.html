@@ -1,30 +1,69 @@
+<!-- Header Component -->
 <app-header></app-header>
+
 <div class="row">
   <!--Left Grid Columne 33%-->
   <div class="col-md-3 col-sm-1 col-xs-1"></div>
   <!--Middle Grid Columne 33%-->
   <div class="col-md-6 col-sm-6 col-xs-6">
+    <!-- Main Card Content -->
     <nb-card>
-      <nb-card-header class="text-center">Our Latest Posts</nb-card-header>
       <nb-card-body>
+        <!-- When Landmarks retrieved from the Database We visualize them in Sorted Order-->
         <ul *ngIf="landmarks">
           <li *ngFor="let landmark of sortBy('order')">
-            <div class="row marginal">
-              <div
-                [ngClass]="{
-                  'col-md-2': landmark.photo_thumb,
-                  'col-md-4': !landmark.photo_thumb
-                }"
-              ></div>
+            <!-- Basic html for each landmark -->
+            <div class="row margin-bot">
+              <!-- If we have a user without write access we center our content -->
+              <div *ngIf="!writeAccess" class="col-md-4"></div>
 
-              <div *ngIf="landmark.photo_thumb" class="col-md-4 centralize">
-                <img src="assets/images/dubai_downtown.jpg" alt="" />
+              <!-- When an image is uploaded we refine the grid to be in the center -->
+              <div *ngIf="landmark.photo_thumb" class="col-md-1"></div>
+
+              <div *ngIf="writeAccess" class="col-md-4 centralize">
+                <!-- Component to upload an image -->
+                <app-upload-image
+                  [currentLandmark]="landmark"
+                ></app-upload-image>
               </div>
+
               <div class="col-md-4">
-                <h3 class="centralize">{{ landmark.title }}</h3>
-                <p class="text-align">
-                  {{ landmark.short_info }}
-                </p>
+                <div class="row">
+                  <div class="col-md-11">
+                    <!-- Component to show the editable components -->
+                    <app-edit-mode [currentLandmark]="landmark"></app-edit-mode>
+                    <!-- Component to show the non-editable components -->
+                    <app-view-mode [currentLandmark]="landmark"></app-view-mode>
+
+                    <!-- Submit button to update the information to the server/database -->
+                    <div *ngIf="changesOccur(landmark)" class="row centralize">
+                      <button class="btn btn-success btn-lg full-width m-2">
+                        Submit
+                      </button>
+                      <button
+                        class="btn btn-danger btn-lg full-width m-2"
+                        (click)="resetToViewMode()"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- PopOver for editing -->
+                  <div class="col-md-1" *ngIf="writeAccess">
+                    <div id="titleEdit" class="editTitleIcon">
+                      <nb-icon
+                        [nbPopover]="edit"
+                        nbPopoverPlacement="right"
+                        nbPopoverTrigger="click"
+                        icon="edit-2-outline"
+                        status="primary"
+                        (click)="selectOption(landmark)"
+                        [options]="popOverOptions"
+                      ></nb-icon>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </li>
@@ -32,6 +71,28 @@
       </nb-card-body>
     </nb-card>
   </div>
+
   <!--Right Grid Columne 33%-->
   <div class="col-md-3 col-sm-1 col-xs-1"></div>
 </div>
+
+<!--PopOver Template for editing a Title & short_info-->
+<ng-template #edit>
+  <p class="text-center p-2">
+    Editing {{ getEditServiceInfo("landmarkTitle") }}
+  </p>
+  <button
+    class="btn btn-primary btn-lg full-width m-2"
+    status="primary"
+    (click)="editTitle()"
+  >
+    Title
+  </button>
+  <button
+    class="btn btn-primary btn-lg full-width m-2"
+    status="primary"
+    (click)="editShortInfo()"
+  >
+    Short info
+  </button>
+</ng-template>

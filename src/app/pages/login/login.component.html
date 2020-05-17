@@ -4,13 +4,16 @@
 
   <!--Middle Grid Columne 33%-->
   <div class="col-md-4 col-sm-4 col-xs-4 centralize">
+    <!-- Login Card -->
     <nb-card>
       <nb-card-body>
-        <div class="row border m-4" (click)="redirectHome()">
+        <div class="row border m-4" (click)="guestLogin()">
           <h1 class="title1">DUBAI</h1>
           <h1 class="title2">Landmarks</h1>
         </div>
         <h1 class="login" id="title">Admin Login</h1>
+
+        <!-- Login Form -->
         <form [formGroup]="loginForm">
           <div class="form-group">
             <label for="username" class="label">Username:</label>
@@ -47,6 +50,7 @@
           </button>
         </form>
       </nb-card-body>
+
       <nb-card-footer>
         <label class="centralize">{{ getLoginMessage() }}</label>
       </nb-card-footer>

@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  public redirectHome() {
-    this.router.navigateByUrl('/home');
+  public guestLogin(): void {
+    this.loginService.login('guest', 'guest');
   }
 
   public getLoginMessage(): string {

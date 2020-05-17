@@ -32,23 +32,23 @@ export class LoginService {
   }
 
   public getUserWriteAccess(): boolean {
-    const accessIDAttr = 'id';
     const ACLpermissionsByIdAttr = 'permissionsById';
     const ACLWriteAttr = 'write';
-    const id = Parse.User.current()[accessIDAttr];
-    return Parse.User.current().getACL()[ACLpermissionsByIdAttr][id][
+    return Parse.User.current().getACL()[ACLpermissionsByIdAttr]['*'][
       ACLWriteAttr
-    ];
+    ]
+      ? true
+      : false;
   }
 
-  public login(username, password) {
+  public login(username: string, password: string): void {
     Parse.User.logIn(username, password).then(
       (authenticateData) => {
         this.loggedIn.next(true);
         this.router.navigateByUrl('/home');
       },
       (error) => {
-        this.loginMessage = 'Invalid credentials!';
+        this.loginMessage = error['message'];
       }
     );
   }
@@ -59,7 +59,7 @@ export class LoginService {
     return this.loggedIn;
   }
 
-  public logout() {
+  public logout(): void {
     this.loggedIn.next(false);
     Parse.User.logOut().then((loggedOutData) => {
       this.router.navigateByUrl('/auth/login');
