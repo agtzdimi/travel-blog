@@ -40,22 +40,6 @@
                       [currentLandmark]="showingLandmark"
                       [mode]="'title'"
                     ></app-view-mode>
-
-                    <!-- Submit button to update the information to the server/database -->
-                    <div
-                      *ngIf="changesOccur(showingLandmark)"
-                      class="row centralize"
-                    >
-                      <button class="btn btn-success btn-lg full-width m-2">
-                        Submit
-                      </button>
-                      <button
-                        class="btn btn-danger btn-lg full-width m-2"
-                        (click)="resetToViewMode()"
-                      >
-                        Cancel
-                      </button>
-                    </div>
                   </div>
 
                   <!-- PopOver for editing Title/Short Info-->
@@ -87,6 +71,19 @@
                   [currentLandmark]="showingLandmark"
                   [mode]="'description'"
                 ></app-view-mode>
+
+                <!-- Submit button to update the information to the server/database -->
+                <div *ngIf="changesOccur()" class="row centralize">
+                  <button class="btn btn-success btn-lg full-width m-2">
+                    Submit
+                  </button>
+                  <button
+                    class="btn btn-danger btn-lg full-width m-2"
+                    (click)="resetToViewMode()"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
 
               <!-- PopOver for editing Description/URL-->

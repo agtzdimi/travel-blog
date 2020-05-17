@@ -14,6 +14,7 @@ import {
   NbCardModule,
   NbIconModule,
   NbPopoverModule,
+  NbDialogModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { UploadImageComponent } from './theme/components/upload-image/upload-image.component';
@@ -22,6 +23,7 @@ import { ViewModeComponent } from './theme/components/view-mode/view-mode.compon
 import { LandmarkDetailsComponent } from './pages/landmark-details/landmark-details.component';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './theme/guards/auth-guard.service';
+import { DialogImageFullComponent } from './theme/components/dialog-image-full/dialog-image-full.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { AuthGuard } from './theme/guards/auth-guard.service';
     EditModeComponent,
     ViewModeComponent,
     LandmarkDetailsComponent,
+    DialogImageFullComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import { AuthGuard } from './theme/guards/auth-guard.service';
     NbPopoverModule,
     FormsModule,
     RouterModule,
+    NbDialogModule.forRoot(),
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

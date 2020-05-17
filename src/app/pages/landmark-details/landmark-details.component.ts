@@ -78,11 +78,12 @@ export class LandmarkDetailsComponent implements OnInit {
     this.editService.editTitleFlag = false;
   }
 
-  public changesOccur(landmark: LandmarkModel): boolean {
+  public changesOccur(): boolean {
     return (
-      (this.getEditServiceInfo('shortInfoFlag') ||
-        this.getEditServiceInfo('titleFlag')) &&
-      landmark.title === this.getEditServiceInfo('landmarkTitle')
+      this.getEditServiceInfo('shortInfoFlag') ||
+      this.getEditServiceInfo('titleFlag') ||
+      this.getEditServiceInfo('DescriptionFlag') ||
+      this.getEditServiceInfo('URLFlag')
     );
   }
 }

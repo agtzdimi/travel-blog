@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LandmarkService } from '../../services/landmark.service';
 import { LandmarkModel } from '../../models/Landmark.model';
+import { NbDialogService } from '@nebular/theme';
+import { DialogImageFullComponent } from '../dialog-image-full/dialog-image-full.component';
+import { UploadImageService } from '../../services/upload-image.service';
 
 class ImageSnippet {
   pending = false;
@@ -19,7 +22,11 @@ export class UploadImageComponent implements OnInit {
   public uploadedImage: ImageSnippet;
   public landmarks: LandmarkModel[];
 
-  constructor(private landmarkService: LandmarkService) {}
+  constructor(
+    private landmarkService: LandmarkService,
+    private dialogService: NbDialogService,
+    private uploadImageService: UploadImageService
+  ) {}
 
   ngOnInit(): void {
     const landResAttrib = 'results';
@@ -47,5 +54,10 @@ export class UploadImageComponent implements OnInit {
     });
 
     reader.readAsDataURL(file);
+  }
+
+  public showFullImage() {
+    this.uploadImageService.landmark = this.currentLandmark;
+    this.dialogService.open(DialogImageFullComponent);
   }
 }
