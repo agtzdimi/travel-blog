@@ -14,13 +14,10 @@
           <li *ngFor="let landmark of sortBy('order')">
             <!-- Basic html for each landmark -->
             <div class="row margin-bot">
-              <!-- If we have a user without write access we center our content -->
-              <div *ngIf="!writeAccess" class="col-md-4"></div>
-
               <!-- When an image is uploaded we refine the grid to be in the center -->
-              <div *ngIf="landmark.photo_thumb" class="col-md-1"></div>
+              <div class="col-md-1"></div>
 
-              <div *ngIf="writeAccess" class="col-md-4 centralize">
+              <div class="col-md-4 centralize">
                 <!-- Component to upload an image -->
                 <app-upload-image
                   [currentLandmark]="landmark"

@@ -1,16 +1,19 @@
-<div *ngIf="currentLandmark && currentLandmark.photo_thumb" class="centralize">
-  <div class="row">
-    <div class="col-md-12">
+<div *ngIf="currentLandmark && currentLandmark.photo_thumb">
+  <div class="row padding-top">
+    <div class="col-md-12 centralize">
       <img
-        [src]="currentLandmark.photo_thumb"
+        [src]="currentLandmark.photo_thumb['url']"
         class="cursor-pointer"
         (click)="showFullImage()"
       />
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
-      <ng-template [ngTemplateOutlet]="uploadText"></ng-template>
+    <div class="col-md-12 centralize">
+      <ng-template
+        *ngIf="writeAccess"
+        [ngTemplateOutlet]="uploadText"
+      ></ng-template>
     </div>
   </div>
 </div>
@@ -18,7 +21,7 @@
   *ngIf="!currentLandmark || !currentLandmark.photo_thumb"
   class="centralize"
 >
-  <nb-card>
+  <nb-card *ngIf="writeAccess">
     <nb-card-body>
       <ng-template [ngTemplateOutlet]="uploadText"></ng-template>
     </nb-card-body>
