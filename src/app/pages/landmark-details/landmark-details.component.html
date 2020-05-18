@@ -3,9 +3,9 @@
 
 <div class="row">
   <!--Left Grid Columne 33%-->
-  <div class="col-md-3 col-sm-1 col-xs-1"></div>
+  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
   <!--Middle Grid Columne 33%-->
-  <div class="col-md-6 col-sm-6 col-xs-6">
+  <div class="col-lg-10 col-md-10 col-sm-6 col-xs-6">
     <!-- Main Card Content -->
     <nb-card>
       <nb-card-body>
@@ -15,16 +15,21 @@
             <!-- Basic html for the selected landmark -->
             <div class="row margin-bot">
               <!-- When an image is uploaded we refine the grid to be in the center -->
-              <div *ngIf="showingLandmark.photo_thumb" class="col-md-1"></div>
+              <div
+                *ngIf="showingLandmark.photo_thumb"
+                class="col-xl-2 col-lg-1 col-md-1 col-sm-1 col-xs-1"
+              ></div>
 
-              <div class="col-md-4 centralize">
+              <div
+                class="col-xl-3 col-lg-4 col-md-9 col-sm-4 col-xs-4 centralize"
+              >
                 <!-- Component to upload an image -->
                 <app-upload-image
                   [currentLandmark]="showingLandmark"
                 ></app-upload-image>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-xl-5 col-lg-7 col-md-12 col-sm-10 col-xs-12">
                 <div class="row">
                   <div class="col-md-11">
                     <!-- Component to show the non-editable components -->
@@ -58,7 +63,7 @@
             </div>
 
             <div class="row margin-bot">
-              <div class="col-md-11">
+              <div class="col-xl-12 col-md-11">
                 <h4>Description:</h4>
                 <app-edit-mode
                   [currentLandmark]="showingLandmark"

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { EditService } from '../../services/edit.service';
 import { LandmarkModel } from '../../models/Landmark.model';
 import { LandmarkService } from '../../services/landmark.service';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'app-edit-mode',
@@ -19,7 +20,8 @@ export class EditModeComponent implements OnInit {
 
   constructor(
     private editService: EditService,
-    private landmarkService: LandmarkService
+    private landmarkService: LandmarkService,
+    private toastrService: NbToastrService
   ) {}
 
   ngOnInit(): void {
@@ -106,11 +108,22 @@ export class EditModeComponent implements OnInit {
     this.resetToViewMode();
     this.landmarkService.updateLandmark(landmark).subscribe(
       (result) => {
-        console.log(result);
+        this.showToast('top-right', 'success', this.currentLandmark.title);
       },
       (error) => {
-        console.log(error);
+        this.showToast('top-right', 'error', this.currentLandmark.title);
       }
     );
+  }
+
+  public showToast(position, status, title): void {
+    let toastrStatus = 'success';
+    if (status === 'error') {
+      toastrStatus = 'danger';
+    }
+    this.toastrService.show(toastrStatus, `Image upload status for ${title}:`, {
+      position,
+      status,
+    });
   }
 }

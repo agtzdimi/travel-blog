@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LandmarkService } from '../../services/landmark.service';
 import { LandmarkModel } from '../../models/Landmark.model';
-import { NbDialogService } from '@nebular/theme';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { DialogImageFullComponent } from '../dialog-image-full/dialog-image-full.component';
 import { UploadImageService } from '../../services/upload-image.service';
 import { LoginService } from '../../services/login.service';
@@ -28,18 +28,12 @@ export class UploadImageComponent implements OnInit {
     private landmarkService: LandmarkService,
     private dialogService: NbDialogService,
     private uploadImageService: UploadImageService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private toastrService: NbToastrService
   ) {}
 
   ngOnInit(): void {
     this.writeAccess = this.loginService.getUserWriteAccess();
-    const landResAttrib = 'results';
-    this.landmarkService.getLandmarks().subscribe(
-      (landmarks) => {
-        this.landmarks = landmarks[landResAttrib];
-      },
-      (error) => {}
-    );
   }
 
   public processFile(imageInput: any): void {
@@ -61,6 +55,28 @@ export class UploadImageComponent implements OnInit {
         .subscribe(
           (uploadData) => {
             console.log(uploadData);
+            const landResAttrib = 'results';
+            this.landmarkService.getLandmarks().subscribe(
+              (landmarks) => {
+                this.landmarks = landmarks[landResAttrib];
+                this.currentLandmark = this.landmarks.filter((landmark) => {
+                  return this.currentLandmark.objectId === landmark.objectId;
+                })[0];
+
+                this.showToast(
+                  'top-right',
+                  'success',
+                  this.currentLandmark.title
+                );
+              },
+              (error) => {
+                this.showToast(
+                  'top-right',
+                  'error',
+                  this.currentLandmark.title
+                );
+              }
+            );
           },
           (error) => {
             console.log(error);
@@ -75,5 +91,16 @@ export class UploadImageComponent implements OnInit {
   public showFullImage() {
     this.uploadImageService.landmark = this.currentLandmark;
     this.dialogService.open(DialogImageFullComponent);
+  }
+
+  public showToast(position, status, title): void {
+    let toastrStatus = 'success';
+    if (status === 'error') {
+      toastrStatus = 'danger';
+    }
+    this.toastrService.show(toastrStatus, `Image upload status for ${title}:`, {
+      position,
+      status,
+    });
   }
 }

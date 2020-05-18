@@ -15,6 +15,7 @@ import {
   NbIconModule,
   NbPopoverModule,
   NbDialogModule,
+  NbToastrModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { UploadImageComponent } from './theme/components/upload-image/upload-image.component';
@@ -52,6 +53,7 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
     NbCardModule,
     NbIconModule,
     NbPopoverModule,
+    NbToastrModule.forRoot(),
     FormsModule,
     RouterModule,
     NbDialogModule.forRoot(),
