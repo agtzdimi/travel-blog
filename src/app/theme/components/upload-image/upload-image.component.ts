@@ -54,7 +54,6 @@ export class UploadImageComponent implements OnInit {
         .uploadImage(this.currentLandmark, formData)
         .subscribe(
           (uploadData) => {
-            console.log(uploadData);
             const landResAttrib = 'results';
             this.landmarkService.getLandmarks().subscribe(
               (landmarks) => {

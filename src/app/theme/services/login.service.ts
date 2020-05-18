@@ -60,9 +60,14 @@ export class LoginService {
   }
 
   public logout(): void {
-    this.loggedIn.next(false);
-    Parse.User.logOut().then((loggedOutData) => {
-      this.router.navigateByUrl('/auth/login');
-    });
+    Parse.User.logOut().then(
+      function (logoutData) {
+        this.loggedIn.next(false);
+        this.router.navigateByUrl('/auth/login');
+      },
+      function (error) {
+        this.router.navigateByUrl('/auth/login');
+      }
+    );
   }
 }

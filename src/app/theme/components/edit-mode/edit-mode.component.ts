@@ -121,7 +121,7 @@ export class EditModeComponent implements OnInit {
     if (status === 'error') {
       toastrStatus = 'danger';
     }
-    this.toastrService.show(toastrStatus, `Image upload status for ${title}:`, {
+    this.toastrService.show(toastrStatus, `Field update status for ${title}:`, {
       position,
       status,
     });
