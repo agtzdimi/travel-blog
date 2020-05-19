@@ -17,19 +17,17 @@
               <!-- When an image is uploaded we refine the grid to be in the center -->
               <div
                 *ngIf="showingLandmark.photo_thumb"
-                class="col-xl-2 col-lg-1 col-md-1 col-sm-1 col-xs-1"
+                class="col-xl-2 col-lg-1"
               ></div>
 
-              <div
-                class="col-xxl-4 col-xl-4 col-lg-4 col-md-9 col-sm-4 col-xs-4 centralize"
-              >
+              <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-11 centralize">
                 <!-- Component to upload an image -->
                 <app-upload-image
                   [currentLandmark]="showingLandmark"
                 ></app-upload-image>
               </div>
 
-              <div class="col-xl-5 col-lg-7 col-md-12 col-sm-10 col-xs-12">
+              <div class="col-xl-5 col-lg-7 col-md-12">
                 <div class="row">
                   <div class="col-md-11">
                     <!-- Component to show the non-editable components -->
@@ -53,7 +51,7 @@
                         nbPopoverTrigger="click"
                         icon="edit-2-outline"
                         status="primary"
-                        (click)="selectOption(showingLandmark)"
+                        (click)="selectedOption(showingLandmark)"
                         [options]="popOverOptions"
                       ></nb-icon>
                     </div>
@@ -84,7 +82,7 @@
                     nbPopoverTrigger="click"
                     icon="edit-2-outline"
                     status="primary"
-                    (click)="selectOption(showingLandmark)"
+                    (click)="selectedOption(showingLandmark)"
                     [options]="popOverOptions"
                   ></nb-icon>
                 </div>

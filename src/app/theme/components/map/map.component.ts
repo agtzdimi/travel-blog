@@ -14,9 +14,12 @@ import * as mapboxgl from 'mapbox-gl';
 })
 export class MapComponent implements OnInit, OnChanges {
   @Input() coordinates: number[];
+
   public color = '#3887be';
   public lngLat: mapboxgl.LngLat;
+
   constructor() {}
+
   ngOnInit() {
     Object.getOwnPropertyDescriptor(mapboxgl, 'accessToken').set(
       'pk.eyJ1IjoiYWd0emRpbWkiLCJhIjoiY2pyaXc2OWN6MDV0cTQ0cXd1NHA0cHI1OSJ9.NQIQGDjleOWNi7bpSu_AGw'

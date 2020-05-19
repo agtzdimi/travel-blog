@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  public selectOption(landmark: LandmarkModel): void {
+  public selectedOption(landmark: LandmarkModel): void {
     this.editService.editLandmarkTitle = landmark.title;
     this.editService.editDescription = landmark.description;
     this.editService.editURL = landmark.url;
@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
     this.editService.editShortInfoFlag = true;
   }
 
-  public sortBy(field): LandmarkModel[] {
+  public sortBy(field: string): LandmarkModel[] {
     return this.landmarks.sort((a, b) =>
       a[field] > b[field] ? 1 : a[field] === b[field] ? 0 : -1
     );

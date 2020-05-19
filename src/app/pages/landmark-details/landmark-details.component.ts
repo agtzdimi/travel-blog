@@ -45,7 +45,7 @@ export class LandmarkDetailsComponent implements OnInit {
     );
   }
 
-  public selectOption(landmark: LandmarkModel): void {
+  public selectedOption(landmark: LandmarkModel): void {
     this.editService.editLandmarkTitle = landmark['title'];
     this.editService.editTitleFlag = false;
     this.editService.editShortInfoFlag = false;

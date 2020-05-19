@@ -111,19 +111,18 @@ export class EditModeComponent implements OnInit {
         this.showToast('top-right', 'success', this.currentLandmark.title);
       },
       (error) => {
-        this.showToast('top-right', 'error', this.currentLandmark.title);
+        this.showToast('top-right', 'warning', this.currentLandmark.title);
       }
     );
   }
 
   public showToast(position, status, title): void {
     let toastrStatus = 'success';
-    if (status === 'error') {
-      toastrStatus = 'danger';
-    }
     this.toastrService.show(toastrStatus, `Field update status for ${title}:`, {
-      position,
-      status,
+      position: position,
+      status: status,
+      destroyByClick: true,
+      duration: 0,
     });
   }
 }

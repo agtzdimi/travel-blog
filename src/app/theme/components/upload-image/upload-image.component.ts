@@ -69,16 +69,12 @@ export class UploadImageComponent implements OnInit {
                 );
               },
               (error) => {
-                this.showToast(
-                  'top-right',
-                  'error',
-                  this.currentLandmark.title
-                );
+                console.log(error);
               }
             );
           },
           (error) => {
-            console.log(error);
+            this.showToast('top-right', 'warning', error['error']['message']);
           }
         );
       this.currentLandmark['photo_thumb'] = this.uploadedImage.src;
@@ -93,13 +89,20 @@ export class UploadImageComponent implements OnInit {
   }
 
   public showToast(position, status, title): void {
-    let toastrStatus = 'success';
-    if (status === 'error') {
-      toastrStatus = 'danger';
+    if (status === 'warning') {
+      this.toastrService.show(status, `${title}:`, {
+        position,
+        status,
+        destroyByClick: true,
+        duration: 0,
+      });
+    } else {
+      this.toastrService.show(status, `Image upload status for ${title}:`, {
+        position: position,
+        status: status,
+        destroyByClick: true,
+        duration: 0,
+      });
     }
-    this.toastrService.show(toastrStatus, `Image upload status for ${title}:`, {
-      position,
-      status,
-    });
   }
 }
