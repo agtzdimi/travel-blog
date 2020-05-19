@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 
+/*
+This Service will contain all the editing information of the administrator
+It contains a function to retrieve any class variable 
+*/
 @Injectable({
   providedIn: 'root',
 })

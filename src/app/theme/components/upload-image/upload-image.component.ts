@@ -6,6 +6,7 @@ import { DialogImageFullComponent } from '../dialog-image-full/dialog-image-full
 import { UploadImageService } from '../../services/upload-image.service';
 import { LoginService } from '../../services/login.service';
 
+// Snippet class to store an Image file
 class ImageSnippet {
   pending = false;
   status = 'init';
@@ -13,6 +14,11 @@ class ImageSnippet {
   constructor(public src: string, public file: File) {}
 }
 
+/*
+This component renders the image showed beside the short_info
+In case no image is yet uploaded it contains the means to upload an image
+as an administrator user
+*/
 @Component({
   selector: 'app-upload-image',
   templateUrl: './upload-image.component.html',
@@ -36,6 +42,7 @@ export class UploadImageComponent implements OnInit {
     this.writeAccess = this.loginService.getUserWriteAccess();
   }
 
+  // Function to upload the file into the database and print the outcome in a Nebular toastr
   public processFile(imageInput: any): void {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
@@ -83,6 +90,7 @@ export class UploadImageComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  // Open Nebular Dialog for full image
   public showFullImage() {
     this.uploadImageService.landmark = this.currentLandmark;
     this.dialogService.open(DialogImageFullComponent);

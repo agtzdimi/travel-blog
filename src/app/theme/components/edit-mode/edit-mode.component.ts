@@ -4,6 +4,9 @@ import { LandmarkModel } from '../../models/Landmark.model';
 import { LandmarkService } from '../../services/landmark.service';
 import { NbToastrService } from '@nebular/theme';
 
+/*
+This sub-component contains the editable components of the home and details pages
+*/
 @Component({
   selector: 'app-edit-mode',
   templateUrl: './edit-mode.component.html',
@@ -42,6 +45,7 @@ export class EditModeComponent implements OnInit {
     return this.editService.getAttribute(attribute);
   }
 
+  // Functions to show or not the respective editable components
   public showTitle(): boolean {
     return (
       this.getEditServiceInfo('titleFlag') &&
@@ -72,6 +76,10 @@ export class EditModeComponent implements OnInit {
     this.editService.editURLFlag = false;
   }
 
+  /* This function checks if the sumbit and cancel button should be shown
+   Two cases are considered as we don't want the ng-template of theses buttons
+   to be rendered twice in home view page
+  */
   public changesOccur(landmark: LandmarkModel): boolean {
     if (
       landmark.title === this.getEditServiceInfo('landmarkTitle') &&
@@ -100,6 +108,9 @@ export class EditModeComponent implements OnInit {
     }
   }
 
+  /*
+  Function to update the information in the Database and print the result with a Nebular toastr
+  */
   public updateInfo(landmark: LandmarkModel): void {
     landmark.description = this.tempDescription;
     landmark.short_info = this.tempShortInfo;
@@ -108,21 +119,35 @@ export class EditModeComponent implements OnInit {
     this.resetToViewMode();
     this.landmarkService.updateLandmark(landmark).subscribe(
       (result) => {
-        this.showToast('top-right', 'success', this.currentLandmark.title);
+        this.showToast(
+          'top-right',
+          'success',
+          this.currentLandmark.title,
+          'successful'
+        );
       },
       (error) => {
-        this.showToast('top-right', 'warning', this.currentLandmark.title);
+        this.showToast(
+          'top-right',
+          'warning',
+          this.currentLandmark.title,
+          'successful'
+        );
       }
     );
   }
 
-  public showToast(position, status, title): void {
+  public showToast(position, status, title, updateOutcome: string): void {
     let toastrStatus = 'success';
-    this.toastrService.show(toastrStatus, `Field update status for ${title}:`, {
-      position: position,
-      status: status,
-      destroyByClick: true,
-      duration: 0,
-    });
+    this.toastrService.show(
+      toastrStatus,
+      `Field update for ${title} was ${updateOutcome}`,
+      {
+        position: position,
+        status: status,
+        destroyByClick: true,
+        duration: 0,
+      }
+    );
   }
 }

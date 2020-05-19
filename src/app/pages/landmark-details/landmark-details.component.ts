@@ -41,10 +41,16 @@ export class LandmarkDetailsComponent implements OnInit {
           );
         })[0];
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
 
+  /*
+  Every time a user clicks on the edit button the edit fields will reset
+  Therefore, only one landmark can be edited at a time
+  */
   public selectedOption(landmark: LandmarkModel): void {
     this.editService.editLandmarkTitle = landmark['title'];
     this.editService.editTitleFlag = false;

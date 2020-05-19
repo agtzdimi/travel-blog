@@ -1,27 +1,18 @@
 @import "styles";
 
-.title1 {
+.title {
   text-align: center;
   font-family: cursive;
   font-weight: 800;
   padding-right: 2rem;
   font-size: xxx-large;
-  color: wheat;
+  color: #ed2e5d;
   cursor: pointer;
 }
 
 .border {
   justify-content: center;
   border-bottom: 5px solid lightblue;
-}
-
-.title2 {
-  text-align: center;
-  font-family: cursive;
-  font-weight: 800;
-  font-size: xxx-large;
-  color: #ed2e5d;
-  cursor: pointer;
 }
 
 .login {

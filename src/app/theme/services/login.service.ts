@@ -3,7 +3,11 @@ import { Router } from '@angular/router';
 import Parse from 'parse';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-// Parse Initialization
+/*
+The login service utilizes the Parse functions and classes
+It contains methodes to check if a user is authenticated & has write access.
+It contains also the API functions to log in and log out
+*/
 Parse.initialize('NqqPKd9Mzzdk0Es6P7NdzXOXNb4tsqdq6Q8p0cZi');
 Parse.serverURL = 'http://localhost:5000/parse';
 
@@ -15,7 +19,7 @@ export class LoginService {
   // BehaviorSubject holds one value. When it is subscribed it emits the value immediately
   private loggedIn: BehaviorSubject<boolean>;
 
-  constructor(protected router: Router) {
+  constructor(private router: Router) {
     this.loggedIn = new BehaviorSubject<boolean>(false);
   }
 
@@ -53,12 +57,16 @@ export class LoginService {
     );
   }
 
-  // Retrieve the Observable's value
   public isUserLoggedIn(): Observable<boolean> {
     this.loggedIn.next(this.isAuthenticated());
     return this.loggedIn;
   }
 
+  /* This is a workaround for logging out
+   The logOut function did not work with the router and the user had to manually refresh the page
+   to be redirected to login screen. Instead of letting the user refresh the implementation forces
+   a refresh after the function execution
+  */
   public logout(): void {
     this.loggedIn.next(false);
     Parse.User.logOut().then(window.location.reload());

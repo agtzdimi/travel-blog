@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { LandmarkModel } from '../models/Landmark.model';
 import { Observable } from 'rxjs';
 
+/*
+This service contains the API functions that will receive the landmarks from the parse-server
+and also update them when the admin sumbits a change on the data
+*/
 @Injectable()
 export class LandmarkService {
   private headers = {

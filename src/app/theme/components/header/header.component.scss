@@ -16,7 +16,9 @@
   text-align: center;
   padding: 12px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 10px;
 }
 
 /* Navbar links on mouse-over */
@@ -32,6 +34,12 @@
   .navbar a {
     float: none;
     display: block;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar a {
+    font-size: 17px;
   }
 }
 

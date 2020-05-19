@@ -19,6 +19,7 @@ export class ViewModeComponent implements OnInit {
     return this.editService.getAttribute(attribute);
   }
 
+  // Functions to show or not the respective components
   public showTitle(): boolean {
     return (
       !(

@@ -39,6 +39,10 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  /*
+  Every time a user clicks on the edit button the edit fields will reset
+  Therefore, only one landmark can be edited at a time
+  */
   public selectedOption(landmark: LandmarkModel): void {
     this.editService.editLandmarkTitle = landmark.title;
     this.editService.editDescription = landmark.description;
