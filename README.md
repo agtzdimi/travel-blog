@@ -23,7 +23,7 @@ The TravelBlog project was generated with [Angular CLI](https://github.com/angul
 ### Prerequisites
 
 To utilize the TravelBlog application a MongoDB and a Parse server (NodeJS/ExpressJS) should been already installed.
-The referenced server implementation can be found in:[Landmarks Server](https://github.com/agtzdimi/landmarks-server)
+The referenced server implementation can be found in: [Landmarks Server](https://github.com/agtzdimi/landmarks-server)
 
 Also Node.JS and Angular CLI should also been installed before starting the application
 
@@ -40,3 +40,4 @@ To install the application the following steps should be executed:
 - To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 - Akveo Team for [Nebular Library](https://akveo.github.io/nebular/)
 - Mapbox team for the open source maps [Link](https://docs.mapbox.com/mapbox-gl-js/api/)
+- [Parse SDK](https://docs.parseplatform.org/js/guide/) used for the Authentication API and the retrieval of the landmarks
