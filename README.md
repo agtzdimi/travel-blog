@@ -1,27 +1,42 @@
 # TravelBlog
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.5.
+The main idea of the project is to showcase information of different landmark buildings
 
-## Development server
+## Summary
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4500/`. The app will automatically reload if you change any of the source files.
+The application contains 2 different modes:
 
-## Code scaffolding
+- _admin mode_
+- _guest mode_
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Based on the mode the user can either view or edit/view the landmarks.
+The application contains 3 pages to guide through the user
 
-## Build
+- The Login page to access the application
+- The Home page visualizing the list of all landmarks registered in the application
+- The Landmark Detail page which will be rendered whenever a user selects a landmark building in the home page
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Installation
 
-## Running unit tests
+The TravelBlog project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.5.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Prerequisites
 
-## Running end-to-end tests
+To utilize the TravelBlog application a MongoDB and a Parse server (NodeJS/ExpressJS) should been already installed.
+The referenced server implementation can be found in:[Landmarks Server](https://github.com/agtzdimi/landmarks-server)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Also Node.JS and Angular CLI should also been installed before starting the application
 
-## Further help
+### Installation steps
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+To install the application the following steps should be executed:
+
+- `git clone https://github.com/agtzdimi/travel-blog` (Or download the zip file from the repo)
+- At the project root run `npm i`
+- To start the application: `npm start`
+
+## Acknowledgments
+
+- To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Akveo Team for [Nebular Library](https://akveo.github.io/nebular/)
+- Mapbox team for the open source maps [Link](https://docs.mapbox.com/mapbox-gl-js/api/)
