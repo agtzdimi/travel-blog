@@ -25,7 +25,7 @@ export class LandmarkService {
     return this.httpClient.get<LandmarkModel[]>(uri, this.headers);
   }
 
-  public updateLandmark(landmark: LandmarkModel): Observable<Object> {
+  public updateLandmark(landmark: LandmarkModel): Observable<object> {
     const landmarkParam = {
       title: landmark.title,
       description: landmark.description,

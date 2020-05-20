@@ -8,9 +8,10 @@ import {
 import * as mapboxgl from 'mapbox-gl';
 import { LoginService } from '../../services/login.service';
 import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component';
-import { NbDialogService, NbToastrService } from '@nebular/theme';
+import { NbDialogService } from '@nebular/theme';
 import { LandmarkModel } from '../../models/Landmark.model';
 import { LandmarkService } from '../../services/landmark.service';
+import { ShowToastrService } from '../../services/show-toastr.service';
 
 @Component({
   selector: 'app-map',
@@ -29,7 +30,7 @@ export class MapComponent implements OnInit, OnChanges {
     private loginService: LoginService,
     private dialogService: NbDialogService,
     private landmarkService: LandmarkService,
-    private toastrService: NbToastrService
+    private showToastrService: ShowToastrService
   ) {}
 
   ngOnInit() {
@@ -44,12 +45,18 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   onDragEnd(marker: mapboxgl.Marker): void {
-    this.coordinates = marker.getLngLat().toArray();
+    const movedCoord = marker.getLngLat().toArray();
     this.dialogService
       .open(DialogConfirmComponent)
       .onClose.subscribe((value) => {
         if (value) {
+          this.coordinates = movedCoord;
           this.updateCoordinates();
+        } else {
+          this.lngLat = new mapboxgl.LngLat(
+            this.coordinates[0],
+            this.coordinates[1]
+          );
         }
       });
   }
@@ -61,34 +68,18 @@ export class MapComponent implements OnInit, OnChanges {
     this.currentLandmark.location = this.coordinates;
     this.landmarkService.updateLandmark(this.currentLandmark).subscribe(
       (result) => {
-        this.showToast(
+        this.showToastrService.showToast(
           'top-right',
           'success',
-          this.currentLandmark.title,
-          'successful'
+          `Field update for ${this.currentLandmark.title} was successful`
         );
       },
       (error) => {
-        this.showToast(
+        this.showToastrService.showToast(
           'top-right',
           'warning',
-          this.currentLandmark.title,
-          'unsuccessful'
+          `Field update for ${this.currentLandmark.title} was unsuccessful`
         );
-      }
-    );
-  }
-
-  public showToast(position, status, title, updateOutcome: string): void {
-    let toastrStatus = 'success';
-    this.toastrService.show(
-      toastrStatus,
-      `Field update for ${title} was ${updateOutcome}`,
-      {
-        position: position,
-        status: status,
-        destroyByClick: true,
-        duration: 0,
       }
     );
   }

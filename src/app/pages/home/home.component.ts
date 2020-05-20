@@ -44,17 +44,11 @@ export class HomeComponent implements OnInit {
   Therefore, only one landmark can be edited at a time
   */
   public selectedOption(landmark: LandmarkModel): void {
-    this.editService.editLandmarkTitle = landmark.title;
-    this.editService.editDescription = landmark.description;
-    this.editService.editURL = landmark.url;
-    this.editService.editLandmarkShortInfo = landmark.short_info;
-    this.editService.editTitleFlag = false;
-    this.editService.editShortInfoFlag = false;
+    this.editService.initializeEditLandmark(landmark);
   }
 
   public toggleInfoTitle(): void {
-    this.editService.editTitleFlag = true;
-    this.editService.editShortInfoFlag = true;
+    this.editService.toggleInfoTitle();
   }
 
   public sortBy(field: string): LandmarkModel[] {

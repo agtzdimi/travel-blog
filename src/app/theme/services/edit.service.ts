@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { LandmarkModel } from '../models/Landmark.model';
 
 /*
 This Service will contain all the editing information of the administrator
-It contains a function to retrieve any class variable 
+It contains a function to retrieve any class variable
 */
 @Injectable({
   providedIn: 'root',
@@ -37,5 +38,31 @@ export class EditService {
         return this.editURLFlag;
         break;
     }
+  }
+
+  public initializeEditLandmark(landmark: LandmarkModel): void {
+    this.editLandmarkTitle = landmark.title;
+    this.editDescription = landmark.description;
+    this.editURL = landmark.url;
+    this.editLandmarkShortInfo = landmark.short_info;
+    this.editTitleFlag = false;
+    this.editShortInfoFlag = false;
+  }
+
+  public toggleInfoTitle(): void {
+    this.editTitleFlag = true;
+    this.editShortInfoFlag = true;
+  }
+
+  public toggleDescrURL(): void {
+    this.editDescriptionFlag = true;
+    this.editURLFlag = true;
+  }
+
+  public resetToViewMode(): void {
+    this.editShortInfoFlag = false;
+    this.editTitleFlag = false;
+    this.editDescriptionFlag = false;
+    this.editURLFlag = false;
   }
 }

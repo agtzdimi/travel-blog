@@ -25,13 +25,13 @@
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.scss",
+              "src/app/theme/styles/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/mapbox-gl/dist/mapbox-gl.css",
               "node_modules/@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["./src"]
+              "includePaths": ["./src/app/theme/styles"]
             },
             "scripts": []
           },
@@ -92,7 +92,7 @@
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.scss",
+              "src/app/theme/styles/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.css"
             ],
             "scripts": []

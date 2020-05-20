@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { EditService } from '../../services/edit.service';
 import { LandmarkModel } from '../../models/Landmark.model';
 import { LandmarkService } from '../../services/landmark.service';
-import { NbToastrService } from '@nebular/theme';
+import { ShowToastrService } from '../../services/show-toastr.service';
 
 /*
 This sub-component contains the editable components of the home and details pages
@@ -24,7 +24,7 @@ export class EditModeComponent implements OnInit {
   constructor(
     private editService: EditService,
     private landmarkService: LandmarkService,
-    private toastrService: NbToastrService
+    private showToastrService: ShowToastrService
   ) {}
 
   ngOnInit(): void {
@@ -70,10 +70,7 @@ export class EditModeComponent implements OnInit {
   }
 
   public resetToViewMode(): void {
-    this.editService.editShortInfoFlag = false;
-    this.editService.editTitleFlag = false;
-    this.editService.editDescriptionFlag = false;
-    this.editService.editURLFlag = false;
+    this.editService.resetToViewMode();
   }
 
   /* This function checks if the sumbit and cancel button should be shown
@@ -119,34 +116,18 @@ export class EditModeComponent implements OnInit {
     this.resetToViewMode();
     this.landmarkService.updateLandmark(landmark).subscribe(
       (result) => {
-        this.showToast(
+        this.showToastrService.showToast(
           'top-right',
           'success',
-          this.currentLandmark.title,
-          'successful'
+          `Field update for ${this.currentLandmark.title} was successful`
         );
       },
       (error) => {
-        this.showToast(
+        this.showToastrService.showToast(
           'top-right',
           'warning',
-          this.currentLandmark.title,
-          'unsuccessful'
+          `Field update for ${this.currentLandmark.title} was unsuccessful`
         );
-      }
-    );
-  }
-
-  public showToast(position, status, title, updateOutcome: string): void {
-    let toastrStatus = 'success';
-    this.toastrService.show(
-      toastrStatus,
-      `Field update for ${title} was ${updateOutcome}`,
-      {
-        position: position,
-        status: status,
-        destroyByClick: true,
-        duration: 0,
       }
     );
   }

@@ -5,6 +5,7 @@ import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { DialogImageFullComponent } from '../dialog-image-full/dialog-image-full.component';
 import { UploadImageService } from '../../services/upload-image.service';
 import { LoginService } from '../../services/login.service';
+import { ShowToastrService } from '../../services/show-toastr.service';
 
 // Snippet class to store an Image file
 class ImageSnippet {
@@ -35,7 +36,7 @@ export class UploadImageComponent implements OnInit {
     private dialogService: NbDialogService,
     private uploadImageService: UploadImageService,
     private loginService: LoginService,
-    private toastrService: NbToastrService
+    private showToastrService: ShowToastrService
   ) {}
 
   ngOnInit(): void {
@@ -69,10 +70,10 @@ export class UploadImageComponent implements OnInit {
                   return this.currentLandmark.objectId === landmark.objectId;
                 })[0];
 
-                this.showToast(
+                this.showToastrService.showToast(
                   'top-right',
                   'success',
-                  this.currentLandmark.title
+                  `Image upload status for ${this.currentLandmark.title}:`
                 );
               },
               (error) => {
@@ -81,7 +82,11 @@ export class UploadImageComponent implements OnInit {
             );
           },
           (error) => {
-            this.showToast('top-right', 'warning', error['error']['message']);
+            this.showToastrService.showToast(
+              'top-right',
+              'warning',
+              error['error']['message']
+            );
           }
         );
       this.currentLandmark['photo_thumb'] = this.uploadedImage.src;
@@ -94,23 +99,5 @@ export class UploadImageComponent implements OnInit {
   public showFullImage() {
     this.uploadImageService.landmark = this.currentLandmark;
     this.dialogService.open(DialogImageFullComponent);
-  }
-
-  public showToast(position, status, title): void {
-    if (status === 'warning') {
-      this.toastrService.show(status, `${title}:`, {
-        position,
-        status,
-        destroyByClick: true,
-        duration: 0,
-      });
-    } else {
-      this.toastrService.show(status, `Image upload status for ${title}:`, {
-        position: position,
-        status: status,
-        destroyByClick: true,
-        duration: 0,
-      });
-    }
   }
 }
