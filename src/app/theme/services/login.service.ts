@@ -48,13 +48,7 @@ export class LoginService {
     );
   }
 
-  /* This is a workaround for logging out
-   The logOut function did not work with the router and the user had to manually refresh the page
-   to be redirected to login screen. Instead of letting the user refresh the implementation forces
-   a refresh after the function execution
-  */
   public logout(): void {
-    //Parse.User.logOut().then(window.location.reload());
     Parse.User.logOut().then(this.router.navigateByUrl('/auth/login'));
   }
 }
