@@ -3,5 +3,9 @@
   [zoom]="[14]"
   [center]="coordinates"
 >
-  <mgl-marker [lngLat]="lngLat" [draggable]="false"></mgl-marker>
+  <mgl-marker
+    [lngLat]="lngLat"
+    [draggable]="writeAccess"
+    (dragEnd)="onDragEnd($event)"
+  ></mgl-marker>
 </mgl-map>

@@ -27,6 +27,7 @@ import { AuthGuard } from './theme/guards/auth-guard.service';
 import { DialogImageFullComponent } from './theme/components/dialog-image-full/dialog-image-full.component';
 import { MapComponent } from './theme/components/map/map.component';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { DialogConfirmComponent } from './theme/components/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
     LandmarkDetailsComponent,
     DialogImageFullComponent,
     MapComponent,
+    DialogConfirmComponent,
   ],
   imports: [
     BrowserModule,

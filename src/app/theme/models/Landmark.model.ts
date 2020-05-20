@@ -7,8 +7,5 @@ export class LandmarkModel {
   url: string;
   photo: string;
   photo_thumb: string;
-  location: {
-    lat: number;
-    long: number;
-  };
+  location: number[];
 }

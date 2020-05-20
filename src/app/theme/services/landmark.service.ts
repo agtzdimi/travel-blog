@@ -31,6 +31,9 @@ export class LandmarkService {
       description: landmark.description,
       url: landmark.url,
       short_info: landmark.short_info,
+      location: JSON.stringify(
+        landmark.location[0] + ',' + landmark.location[1]
+      ),
     };
     const uri = `http://localhost:5000/parse/landmarks/${landmark.objectId}`;
 

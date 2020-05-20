@@ -95,7 +95,8 @@
           <div class="col-md-12">
             <app-map
               *ngIf="showingLandmark"
-              [(coordinates)]="showingLandmark.location"
+              [coordinates]="showingLandmark.location"
+              [currentLandmark]="showingLandmark"
             >
             </app-map>
           </div>

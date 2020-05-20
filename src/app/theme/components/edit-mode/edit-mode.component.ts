@@ -131,7 +131,7 @@ export class EditModeComponent implements OnInit {
           'top-right',
           'warning',
           this.currentLandmark.title,
-          'successful'
+          'unsuccessful'
         );
       }
     );
